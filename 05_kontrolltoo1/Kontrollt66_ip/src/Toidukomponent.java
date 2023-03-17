@@ -1,11 +1,10 @@
 public class Toidukomponent {
     Toiduaine toiduaine;
-    int kogusGrammides;
+    double kogusGrammides;
 
-    public Toidukomponent(Toiduaine toiduaine, int kogusGrammides){
+    public Toidukomponent(Toiduaine toiduaine, double kogusGrammides){
         this.toiduaine = toiduaine;
         this.kogusGrammides = kogusGrammides;
     }
 
-    //rasvakoguse arvutamine
 }
