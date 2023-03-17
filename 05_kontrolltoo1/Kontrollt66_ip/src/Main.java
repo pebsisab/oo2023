@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         //yl - Salat
@@ -21,9 +23,14 @@ public class Main {
         System.out.println("Toidukomponendis nr3 on "+ arvutus3 + "g rasva");
 
         list1.lisaToiduaine("Porgand", 4, 10, 86);
+        list1.lisaToiduaine("Kaalikas", 5, 10, 85);
+        list1.vaataAndmeid("Porgand");
+        list1.kustutaToiduaine("Kaalikas");
+
+        List<Toiduaine> leitud = list1.rasvaJargiOtsimine(2,10);
+        for (int i = 0; i < leitud.size(); i++) {
+            System.out.println("Toiduaine, mis on antud vahemikus: " + leitud.get(i).nimetus);
+        }
     }
-
-
-
 
 }
