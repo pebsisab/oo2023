@@ -34,10 +34,17 @@ public class TellimusController {
             new Toode(2, "Fanta", 1.0),
             new Toode(3, "Sprite", 1.7)
     ));
+
+    List<Toode> tellimuse2Tooted = new ArrayList<>(Arrays.asList(
+            new Toode(3, "Sprite", 1.7),
+            new Toode(4, "Vichy", 2.0),
+            new Toode(5, "Vitamin well", 2.5)
+    ));
+
     Isik tellija = new Isik(1, "Ees", "Perenimi", new Date());
     List<Tellimus> tellimused = new ArrayList<>(Arrays.asList(
-            new Tellimus(1, tellija, tellimuseTooted)
-            //new Tellimus(2, tellija, tellimuse2Tooted)
+            new Tellimus(1, tellija, tellimuseTooted),
+            new Tellimus(2, tellija, tellimuse2Tooted)
     ));
 //
 //    // GET    api.err.ee/tellimused
@@ -54,8 +61,8 @@ public class TellimusController {
         tellimusRepository.deleteById(id);
         return "Tellimus kustutatud!";
     }
-    // POST localhost:8080/lisa-tellimus
 
+    // POST localhost:8080/lisa-tellimus2?id=9&tellijaId=1&tooteIds=1,4,5
     @PostMapping("lisa-tellimus2")
     public List<Tellimus> lisaTellimus2(
             @RequestParam int id,
@@ -94,19 +101,35 @@ public class TellimusController {
     public List<Tellimus> lisaTellimus4(
             @RequestBody Tellimus tellimus) {
        // Isik isik = isikController.isikud.get(tellimus.getTellija().getId());
+        System.out.println(tellimus.getId());
+        System.out.println(tellimus.getTellija());
+        System.out.println(tellimus.getTooted());
+//        Isik isik = isikController.isikud.get(tellimus.getTellija().getId());
         Isik isik = isikRepository.findById(tellimus.getTellija().getId()).get();
 
         List<Toode> tellitudTooted = new ArrayList<>();
         for (Toode t: tellimus.getTooted()) {
-            //Toode toode = toodeController.tooted.get(t.getId());
+//            Toode toode = toodeController.tooted.get(t.getId());
             Toode toode = toodeRepository.findById(t.getId()).get();
             tellitudTooted.add(toode);
         }
 
-        //tellimused.add(new Tellimus(tellimus.getId(), isik, tellitudTooted));
+//        tellimused.add(new Tellimus(tellimus.getId(), isik, tellitudTooted));
         tellimusRepository.save(new Tellimus(tellimus.getId(), isik, tellitudTooted));
         return tellimusRepository.findAll();
+    }
 
+    @GetMapping("saa-kogusumma")
+    public double saaKogusumma() {
+        List<Tellimus> tellimused = tellimusRepository.findAll();
+        double kogusumma = 0;
+        for ( Tellimus t: tellimused) {
+            for (Toode toode: t.getTooted()) {
+//                kogusumma = kogusumma + toode.getHind();
+                kogusumma += toode.getHind();
+            }
+        }
+        return kogusumma;
     }
 }
 

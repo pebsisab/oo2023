@@ -43,7 +43,7 @@ public class ToodeController {
             @RequestParam int id,
             @RequestParam String nimi,
             @RequestParam double hind) {
-        tooted.add(new Toode(id, nimi, hind));
+       // tooted.add(new Toode(id, nimi, hind));
         //return tooted;
         toodeRepository.save(new Toode(id, nimi, hind));
         return toodeRepository.findAll();

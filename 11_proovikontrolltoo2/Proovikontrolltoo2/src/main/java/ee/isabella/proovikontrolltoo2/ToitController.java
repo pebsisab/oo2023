@@ -40,18 +40,18 @@ public class ToitController {
         return sysivesik;
     }
 
-//    @GetMapping("saa-toiduained")
-//    public List<Toiduaine> saaToiduAined(
-//            @RequestParam String nimetus
-//    ) {
-//        Toit toit = toitRepository.findById(nimetus).get();
-//        List<Toidukomponent> toidukomponendid = toit.getToidukomponendid();
-//        int kogus = 0;
-//        for (Toidukomponent t: toidukomponendid) {
-//            kogus
-//        }
-//        return new ArrayList<>();
-//    }
+    @GetMapping("saa-toiduained")
+    public List<Toiduaine> saaToiduAined(
+            @RequestParam String nimetus
+    ) {
+        Toit toit = toitRepository.findById(nimetus).get();
+        List<Toidukomponent> toidukomponendid = toit.getToidukomponendid();
+        int kogus = 0;
+        for (Toidukomponent t: toidukomponendid) {
+            kogus += t.getKogus();
+        }
+        return new ArrayList<>();
+    }
 
 
 }

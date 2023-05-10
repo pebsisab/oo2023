@@ -27,11 +27,8 @@ public class ToiduaineController {
         List<Toiduaine> tagastatavadToiduained = new ArrayList<>();
         for (int i = 0; i < toiduained.size(); i++) {
             if (toiduained.get(i).getRasv() > alg && toiduained.get(i).getRasv() < l6pp) {
-                if (toiduained.get(i).getRasv() > alg && toiduained.get(i).getRasv() < l6pp) {
-                    tagastatavadToiduained.add(toiduained.get(i));
-                }
+                tagastatavadToiduained.add(toiduained.get(i));
             }
-            return tagastatavadToiduained;
         }
         return tagastatavadToiduained;
     }
@@ -68,6 +65,7 @@ public class ToiduaineController {
         return toiduaineRepository.findByNimetus(nimetus);
     }
 
+    // localhost:8080/kustuta-toiduaine?id=1
     @GetMapping("kustuta-toiduaine")
     public List<Toiduaine> kustutaToiduaine(
             @RequestParam Long id
